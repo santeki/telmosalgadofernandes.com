@@ -1,0 +1,17 @@
+# Gerado pelo Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Os rascunhos nunca saem do Mac
+content/drafts/
+
+.claude/
+.DS_Store
+
+# Ferramentas locais: ficam no Mac, fora do repositório público
+CLAUDE.md
+fontes
+
+# A fotografia do Telmo fica no Mac enquanto não for usada no site
+assets/images/foto-telmo.jpg

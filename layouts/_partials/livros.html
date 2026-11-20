@@ -1,0 +1,8 @@
+{{- /* Os livros de data/readings.yaml: no site publicado só os recomendados; no Mac (hugo server) também as sugestões com draft: true. */ -}}
+{{- $livros := slice }}
+{{- range hugo.Data.readings }}
+  {{- if or (not .draft) (ne hugo.Environment "production") }}
+    {{- $livros = $livros | append . }}
+  {{- end }}
+{{- end }}
+{{- return $livros }}

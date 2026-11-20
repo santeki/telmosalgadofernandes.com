@@ -1,0 +1,4 @@
+{{ define "main" }}
+{{- /* A página de um tipo de texto (Essays, Short posts…): os textos desse tipo. */ -}}
+{{ partial "lista.html" (partial "escritos.html" .Params.category) }}
+{{ end }}

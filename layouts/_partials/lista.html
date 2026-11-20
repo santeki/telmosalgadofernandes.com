@@ -1,0 +1,18 @@
+{{- /* A lista dos textos, com o título grande, a frase e a data. Recebe as páginas. */ -}}
+{{- with . }}
+<ol class="list">
+  {{- range . }}
+  <li>
+    <a href="{{ .RelPermalink }}">
+      <h2>{{ .Title }}</h2>
+      {{- with .Description }}
+      <p class="desc">{{ . }}</p>
+      {{- end }}
+    </a>
+    {{ partial "meta.html" . }}
+  </li>
+  {{- end }}
+</ol>
+{{- else }}
+<p class="empty">Nothing here yet.</p>
+{{- end }}

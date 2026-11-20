@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{- /* A página Readings: os livros recomendados, de data/readings.yaml. */ -}}
+{{- with partial "livros.html" . }}
+<ol class="books">
+  {{- range . }}
+  <li>
+    <h2>{{ with .link }}<a href="{{ . }}">{{ end }}{{ .title }}{{ with .link }}</a>{{ end }}</h2>
+    <p class="meta">
+      {{- if .draft }}<span class="badge">Draft</span>{{ end -}}
+      {{ .author }}{{ with .year }} · {{ . }}{{ end }}
+    </p>
+    {{- with .note }}
+    <p class="note">{{ . | markdownify }}</p>
+    {{- end }}
+  </li>
+  {{- end }}
+</ol>
+{{- else }}
+<p class="empty">Nothing here yet.</p>
+{{- end }}
+{{ end }}

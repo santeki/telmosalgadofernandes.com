@@ -1,0 +1,10 @@
+{{- /* Todos os textos, do mais recente para o mais antigo: os publicados e, no Mac (hugo server), também os rascunhos.
+Recebe a chave de um tipo («essay», «short»…) para devolver só esse, ou "" para devolver todos. */ -}}
+{{- $pages := where site.RegularPages "Section" "articles" }}
+{{- if ne hugo.Environment "production" }}
+  {{- $pages = $pages | union (where site.RegularPages "Section" "drafts") }}
+{{- end }}
+{{- with . }}
+  {{- $pages = where $pages "Params.category" . }}
+{{- end }}
+{{- return sort $pages "Date" "desc" }}

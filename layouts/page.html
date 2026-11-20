@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{- if in (slice "articles" "drafts") .Section }}
+<article class="post">
+  <header class="post-header">
+    {{- if eq .Section "drafts" }}
+    <p><span class="badge">Draft · not published</span></p>
+    {{- end }}
+    <h1>{{ .Title }}</h1>
+    <p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time> · {{ .ReadingTime }} min read</p>
+  </header>
+  {{- with .Params.in_short }}
+  <aside class="in-short">
+    <p class="label">In short</p>
+    <p>{{ . | markdownify }}</p>
+  </aside>
+  {{- end }}
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  <p class="back"><a href="{{ site.Home.RelPermalink }}">← All writing</a></p>
+</article>
+{{- else }}
+<article class="page prose">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{- end }}
+{{ end }}

@@ -1,0 +1,259 @@
+/* A identidade visual do site: fundo preto quente, creme, a Helvetica Neue Condensed (Black nos títulos, em maiúsculas;
+   Bold no texto), o grão por cima de tudo e a tinta de prensa (os filtros SVG de layouts/_partials/tinta.html). */
+
+@font-face { font-family: "Condensada"; font-weight: 1 1000; src: local("HelveticaNeue-CondensedBlack"), local("Helvetica Neue Condensed Black"), local("Arial Narrow Bold"), local("Roboto Condensed Black"); }
+@font-face { font-family: "Condensada Texto"; font-weight: 1 1000; src: local("HelveticaNeue-CondensedBold"), local("Helvetica Neue Condensed Bold"), local("Arial Narrow Bold"), local("Roboto Condensed Bold"); }
+
+:root {
+  --bg: #0e0d0b; /* um preto quente (o Telmo, 2026-11-19: "menos castanho e um pouco mais cinzento", depois "só um pouco mais preto") */
+  --fg: #f4eee0;
+  --muted: #a39d93;
+  --line: #262421;
+  --f-head: "Condensada", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Condensada Texto", "Condensada", "Helvetica Neue", Arial, sans-serif;
+  --gutter: 16px;
+  --wide: 75rem;
+  --text-w: 42rem;
+}
+@media (min-width: 768px) { :root { --gutter: 40px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1.25rem/1.6 var(--f-body);
+  letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+::selection { background: var(--fg); color: var(--bg); }
+
+/* O grão por cima de tudo */
+body::after {
+  content: "";
+  position: fixed; inset: -50%;
+  pointer-events: none; z-index: 50;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); } 60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: reduce) { body::after { animation: none; } }
+
+.site-header, main, .site-footer {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* Topo: a imagem à esquerda, os tipos de texto ao centro, o About à direita (o Telmo, 2026-11-19) */
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; /* o menu e o About à altura do meio da imagem (o Telmo, 2026-11-19) */
+  gap: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 2.5rem;
+}
+.site-name {
+  font: 400 1.6rem/1 var(--f-head);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+/* O menu e o About: só o texto, sem cápsulas nem sublinhado (o Telmo, 2026-11-19); o da página aberta fica aceso */
+.menu {
+  justify-self: center;
+  display: flex;
+  gap: 2rem;
+}
+.menu a, .about {
+  font: 400 1.05rem/1 var(--f-head);
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .4rem 0;
+  transition: color .2s;
+}
+.about { justify-self: end; }
+.menu a:hover, .about:hover { color: var(--fg); }
+.menu a[aria-current="page"], .about.on { color: var(--fg); }
+.menu span, .about span { filter: url(#prensa-leitura); }
+
+/* Em ecrãs estreitos o menu aperta; só quando já não cabe na linha da imagem desce para uma linha própria, ao centro */
+@media (max-width: 600px) { .menu { gap: 1.25rem; } }
+@media (max-width: 440px) {
+  .site-header { grid-template-columns: 1fr auto; row-gap: 1.25rem; }
+  .menu { grid-row: 2; grid-column: 1 / -1; }
+}
+
+/* Títulos: a Condensed Black em maiúsculas, com a tinta de prensa */
+.list h2, .post-header h1, .prose h1, .prose h2, .prose h3 {
+  font-family: var(--f-head);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+/* Página inicial: a lista dos artigos, do mais recente para o mais antigo, só com o título, a frase e a data */
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.list li { padding: 2.25rem 0 2.5rem; border-bottom: 1px solid var(--line); }
+.list a { display: block; transition: color .2s; }
+.list h2 {
+  font-size: clamp(2.4rem, 1.3rem + 4.5vw, 5.5rem);
+  line-height: .9;
+  margin: 0 0 .7rem;
+  max-width: 18ch;
+  filter: url(#prensa);
+}
+.list .desc {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0 0 .9rem;
+  max-width: 40rem;
+  filter: url(#prensa-leitura);
+}
+.list a:hover h2 { color: var(--muted); }
+
+/* Readings: os livros, com o título, o autor e o ano, e a nota de porque vale a pena */
+.books { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); max-width: var(--text-w); }
+.books li { padding: 1.6rem 0 1.75rem; border-bottom: 1px solid var(--line); }
+.books h2 {
+  font: 400 clamp(1.7rem, 1.2rem + 1.6vw, 2.4rem)/1 var(--f-head);
+  text-transform: uppercase;
+  letter-spacing: 0;
+  margin: 0 0 .5rem;
+  filter: url(#prensa-media);
+}
+.books h2 a:hover { color: var(--muted); }
+.books .note { margin: .75rem 0 0; max-width: 40rem; filter: url(#prensa-leitura); }
+
+/* Data e etiquetas */
+.meta {
+  font: 400 .95rem/1.4 var(--f-head);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--muted);
+  margin: 0;
+}
+.badge {
+  display: inline-block;
+  padding: .15rem .6rem;
+  margin-right: .5rem;
+  border-radius: 999px;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 30%, transparent);
+}
+
+/* Artigo */
+.post-header, .in-short, .prose, .back, .page {
+  max-width: var(--text-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-header { text-align: center; max-width: 60rem; margin-bottom: 3rem; }
+.post-header h1 {
+  font-size: clamp(2.8rem, 1.4rem + 5.5vw, 6.5rem);
+  line-height: .9;
+  margin: .9rem 0 1.1rem;
+  filter: url(#prensa);
+}
+.in-short {
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 2.75rem;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--fg) 6%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 14%, transparent);
+}
+.in-short .label {
+  font: 400 .9rem/1 var(--f-head);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  margin: 0 0 .5rem;
+}
+.in-short p:last-child { margin: 0; font-size: 1.3rem; line-height: 1.45; filter: url(#prensa-leitura); }
+
+.prose p, .prose li, .prose blockquote { filter: url(#prensa-leitura); }
+.prose h1 { font-size: clamp(2.6rem, 1.6rem + 4vw, 4.5rem); line-height: .92; margin: 0 0 1.75rem; filter: url(#prensa); }
+.prose h2 { font-size: 2rem; line-height: 1; margin: 3rem 0 1rem; filter: url(#prensa-media); }
+.prose h3 { font-size: 1.5rem; line-height: 1.05; margin: 2.5rem 0 .75rem; filter: url(#prensa-media); }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose figure { margin: 0 0 1.4rem; }
+.prose li { margin-bottom: .4rem; }
+.prose strong, .prose b { font-family: var(--f-head); font-weight: 400; }
+.prose a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: color-mix(in srgb, var(--fg) 45%, transparent); }
+.prose a:hover { text-decoration-color: var(--fg); }
+.prose blockquote {
+  margin-left: 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--line);
+  color: color-mix(in srgb, var(--fg) 75%, var(--bg));
+}
+.prose img { border-radius: 4px; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.75rem 0; }
+
+/* Notas de rodapé: o número numa pastilha */
+.prose sup { line-height: 0; }
+.prose .footnote-ref {
+  font-size: .62em;
+  margin-left: .12em;
+  padding: 0 .3em;
+  border-radius: 6px;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 14%, transparent);
+  text-decoration: none;
+}
+.prose .footnote-ref:hover { background: color-mix(in srgb, var(--fg) 28%, transparent); }
+.footnotes {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 3.5rem;
+}
+.footnotes hr { margin: 0 0 1.25rem; }
+.footnotes ol { padding-left: 1.3rem; }
+.footnotes li p { margin: 0 0 .5rem; }
+.footnote-backref { text-decoration: none !important; }
+
+.back { margin-top: 3.5rem; }
+.back a {
+  font: 400 1.05rem/1 var(--f-head);
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .2s;
+}
+.back a:hover { color: var(--fg); }
+.empty { color: var(--muted); }
+
+/* Rodapé */
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font: 400 .95rem/1.4 var(--f-head);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--muted);
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+}
+.site-footer a:hover { color: var(--fg); }
+
+/* O retrato no canto superior esquerdo, sem o nome; a moldura tem o formato da imagem, que não se corta nem se altera */
+.site-name { display: block; justify-self: start; }
+.site-name .portrait {
+  width: 3.5rem; height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+  filter: none;
+  box-shadow: 0 0 0 1px var(--line);
+}

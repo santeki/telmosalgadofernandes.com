@@ -1,0 +1,38 @@
+# Os livros recomendados na página Readings, pela ordem em que aparecem.
+#
+# Cada livro leva:
+#   title:  o título
+#   author: o autor ou os autores
+#   year:   o ano da edição que recomendas
+#   note:   (opcional) uma ou duas frases tuas, em inglês, a dizer porque vale a pena
+#   link:   (opcional) onde o encontrar, de preferência a página do editor
+#   draft:  true enquanto for só uma sugestão; aparece no Mac, com a etiqueta Draft, mas não no site publicado
+#
+# Os cinco abaixo são sugestões minhas para escolheres, não recomendações tuas: ficam com draft: true.
+# Para recomendar um, escreve a tua nota e apaga a linha draft. A página e o menu só aparecem no site
+# publicado quando houver pelo menos um livro sem draft.
+
+- title: Tomorrow's Lawyers
+  author: Richard Susskind
+  year: 2023
+  draft: true
+
+- title: Online Courts and the Future of Justice
+  author: Richard Susskind
+  year: 2019
+  draft: true
+
+- title: The Reasonable Robot
+  author: Ryan Abbott
+  year: 2020
+  draft: true
+
+- title: New Laws of Robotics
+  author: Frank Pasquale
+  year: 2020
+  draft: true
+
+- title: Atlas of AI
+  author: Kate Crawford
+  year: 2021
+  draft: true

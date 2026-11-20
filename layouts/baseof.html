@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+{{ partial "tinta.html" . }}
+<header class="site-header">
+  <a class="site-name" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}">
+    {{- with resources.Get "images/portrait.jpg" }}
+    {{- /* A imagem do canto, a cores e sem o nome ao lado, só recortada, com a moldura no formato dela para a cabeça ficar ao centro (o Telmo, 2026-11-19). A fotografia dele, tratada a preto e branco, está em assets/images/foto-telmo.jpg */ -}}
+    {{- $img := .Resize "176x jpg" }}
+    <img class="portrait" src="{{ $img.RelPermalink }}" width="88" height="{{ div (mul $img.Height 88) $img.Width }}" alt="">
+    {{- end }}
+  </a>
+  {{- /* Ao centro, os tipos de texto numa só linha (o Telmo, 2026-11-19); só os tipos com textos;
+  aceso o da página aberta, ou o do texto aberto. */ -}}
+  {{- $aqui := .Params.category }}
+  <nav class="menu" aria-label="Writing">
+    {{- range site.Params.categories }}
+      {{- if partial "escritos.html" .key }}
+        {{- with site.GetPage .page }}
+    <a href="{{ .RelPermalink }}"{{ if eq $aqui .Params.category }} aria-current="page"{{ end }}><span>{{ .Title }}</span></a>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- /* Depois dos tipos de texto, os livros recomendados (o Telmo, 2026-11-19), quando houver */ -}}
+    {{- if partial "livros.html" . }}
+      {{- with site.GetPage "/readings" }}
+    <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}><span>Readings</span></a>
+      {{- end }}
+    {{- end }}
+  </nav>
+  {{- /* À direita, o About */ -}}
+  {{- with site.GetPage "/about" }}
+  <a class="about{{ if eq $.RelPermalink .RelPermalink }} on{{ end }}" href="{{ .RelPermalink }}"><span>About</span></a>
+  {{- end }}
+</header>
+<main>
+{{ block "main" . }}{{ end }}
+</main>
+<footer class="site-footer">
+  <span>© {{ now.Year }} {{ site.Title }}</span>
+  {{- with site.Home.OutputFormats.Get "rss" }}
+  <a href="{{ .RelPermalink }}">RSS</a>
+  {{- end }}
+</footer>
+</body>
+</html>

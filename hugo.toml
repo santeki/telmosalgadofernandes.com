@@ -1,0 +1,51 @@
+baseURL = 'https://telmosalgadofernandes.com/'
+locale = 'en-GB'
+title = 'Telmo Salgado Fernandes'
+
+# A página inicial é a lista dos artigos: não há páginas de secção, etiquetas nem categorias.
+disableKinds = ['section', 'taxonomy', 'term']
+enableRobotsTXT = true
+
+# Os rascunhos só existem no Mac: na versão publicada não são gerados, mesmo que a pasta lá esteja.
+[[cascade]]
+  [cascade.build]
+    render = 'never'
+    list = 'never'
+    publishResources = false
+  [cascade.target]
+    path = '{/drafts,/drafts/**}'
+    environment = 'production'
+
+[params]
+  description = 'Articles on law and artificial intelligence.'
+
+  # Os tipos de texto, pela ordem do menu. Cada texto diz o seu em «category:»; um tipo sem textos não aparece no menu.
+  [[params.categories]]
+    key = 'essay'
+    one = 'Essay'
+    name = 'Essays'
+    page = '/essays'
+  [[params.categories]]
+    key = 'short'
+    one = 'Short post'
+    name = 'Short posts'
+    page = '/short-posts'
+  [[params.categories]]
+    key = 'research'
+    one = 'Research'
+    name = 'Research'
+    page = '/research'
+  [[params.categories]]
+    key = 'op-ed'
+    one = 'Op-ed'
+    name = 'Op-eds'
+    page = '/op-eds'
+
+[outputs]
+  home = ['html', 'rss']
+  page = ['html']
+
+[imaging.webp]
+  quality = 82
+[imaging.jpeg]
+  quality = 82
