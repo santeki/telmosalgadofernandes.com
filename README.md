@@ -1,6 +1,6 @@
 # Site pessoal
 
-O site de Telmo Salgado Fernandes, em inglês, em telmosalgadofernandes.com. A página inicial é a lista de todos os textos, do mais recente para o mais antigo, sem imagens. No topo, ao centro, o menu leva aos tipos de texto (Essays, Short posts, Research, Op-eds); um tipo só aparece no menu quando tem textos.
+O site de Telmo Salgado Fernandes, em inglês, em telmosalgadofernandes.com. A página inicial é o About. No topo, ao centro, o menu leva às páginas de cada tipo de texto, com a lista dos textos desse tipo (Essays, Short posts, Research, Op-eds); um tipo só aparece no menu quando tem textos.
 
 ## Ver o site no Mac
 
@@ -45,7 +45,7 @@ Os livros da página Readings estão em `data/readings.yaml`, um por bloco, com 
 
 - `content/articles/`: os artigos publicados.
 - `content/drafts/`: os rascunhos.
-- `content/about/index.md`: a página About.
+- `content/_index.md`: o texto do About, que é a página inicial.
 - `content/essays.md`, `short-posts.md`, `research.md`, `op-eds.md`: as páginas de cada tipo de texto.
 - `data/readings.yaml`: os livros recomendados.
 - `assets/images/portrait.jpg`: a imagem do canto.

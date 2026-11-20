@@ -31,10 +31,8 @@
       {{- end }}
     {{- end }}
   </nav>
-  {{- /* À direita, o About */ -}}
-  {{- with site.GetPage "/about" }}
-  <a class="about{{ if eq $.RelPermalink .RelPermalink }} on{{ end }}" href="{{ .RelPermalink }}"><span>About</span></a>
-  {{- end }}
+  {{- /* À direita, o About, que é a página inicial; a imagem do canto leva lá também */ -}}
+  <a class="about{{ if .IsHome }} on{{ end }}" href="{{ site.Home.RelPermalink }}"><span>About</span></a>
 </header>
 <main>
 {{ block "main" . }}{{ end }}

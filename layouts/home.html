@@ -1,4 +1,7 @@
 {{ define "main" }}
-{{- /* A página inicial: todos os textos, de todos os tipos. */ -}}
-{{ partial "lista.html" (partial "escritos.html" "") }}
+{{- /* A página inicial é o About (o Telmo, 2026-11-20): o texto de content/_index.md. Os textos estão nas páginas de cada tipo. */ -}}
+<article class="page prose">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
 {{ end }}

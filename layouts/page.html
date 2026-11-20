@@ -17,7 +17,13 @@
   <div class="prose">
     {{ .Content }}
   </div>
-  <p class="back"><a href="{{ site.Home.RelPermalink }}">← All writing</a></p>
+  {{- /* De volta à página do tipo do texto (Essays, Short posts…) */ -}}
+  {{- $c := .Params.category }}
+  {{- range where site.Params.categories "key" $c }}
+    {{- with site.GetPage .page }}
+  <p class="back"><a href="{{ .RelPermalink }}">← All {{ lower .Title }}</a></p>
+    {{- end }}
+  {{- end }}
 </article>
 {{- else }}
 <article class="page prose">
