@@ -7,9 +7,10 @@
 {{ partial "tinta.html" . }}
 <header class="site-header">
   <a class="site-name" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}">
-    {{- with resources.Get "images/portrait.jpg" }}
+    {{- /* Em ensaio (o Telmo, 2026-11-20): o Alexandre do Nomos em vez do Invincible, que fica em images/portrait.jpg */ -}}
+    {{- with resources.Get "images/alexandre.png" }}
     {{- /* A imagem do canto, a cores e sem o nome ao lado, só recortada, com a moldura no formato dela para a cabeça ficar ao centro (o Telmo, 2026-11-19). A fotografia dele, tratada a preto e branco, está em assets/images/foto-telmo.jpg */ -}}
-    {{- $img := .Resize "176x jpg" }}
+    {{- $img := .Resize "176x png" }}
     <img class="portrait" src="{{ $img.RelPermalink }}" width="88" height="{{ div (mul $img.Height 88) $img.Width }}" alt="">
     {{- end }}
   </a>

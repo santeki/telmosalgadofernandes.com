@@ -251,10 +251,7 @@ body::after {
 .site-name { display: block; justify-self: start; }
 .site-name .portrait {
   width: 3.5rem; height: auto;
-  border-radius: 4px;
-  object-fit: cover;
-  filter: none;
-  box-shadow: 0 0 0 1px var(--line);
+  filter: none; /* o Alexandre sem moldura, sobre o fundo do site (o Telmo, 2026-11-20) */
 }
 
 /* O About na página inicial: o título mais pequeno e o texto maior, para ficarem mais perto (o Telmo, 2026-11-20) */
