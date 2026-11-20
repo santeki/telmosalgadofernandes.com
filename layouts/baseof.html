@@ -31,8 +31,7 @@
       {{- end }}
     {{- end }}
   </nav>
-  {{- /* À direita, o About, que é a página inicial; a imagem do canto leva lá também */ -}}
-  <a class="about{{ if .IsHome }} on{{ end }}" href="{{ site.Home.RelPermalink }}"><span>About</span></a>
+  {{- /* Sem link para o About no canto direito (o Telmo, 2026-11-20): o About é a página inicial, e a imagem leva lá */ -}}
 </header>
 <main>
 {{ block "main" . }}{{ end }}

@@ -56,7 +56,7 @@ body::after {
   padding-right: var(--gutter);
 }
 
-/* Topo: a imagem à esquerda, os tipos de texto ao centro, o About à direita (o Telmo, 2026-11-19) */
+/* Topo: a imagem à esquerda e os tipos de texto ao centro; a terceira coluna fica vazia para o menu ficar centrado */
 .site-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -70,23 +70,22 @@ body::after {
   text-transform: uppercase;
   letter-spacing: 0;
 }
-/* O menu e o About: só o texto, sem cápsulas nem sublinhado (o Telmo, 2026-11-19); o da página aberta fica aceso */
+/* O menu: só o texto, sem cápsulas nem sublinhado (o Telmo, 2026-11-19); o da página aberta fica aceso */
 .menu {
   justify-self: center;
   display: flex;
   gap: 2rem;
 }
-.menu a, .about {
+.menu a {
   font: 400 1.05rem/1 var(--f-head);
   text-transform: uppercase;
   color: var(--muted);
   padding: .4rem 0;
   transition: color .2s;
 }
-.about { justify-self: end; }
-.menu a:hover, .about:hover { color: var(--fg); }
-.menu a[aria-current="page"], .about.on { color: var(--fg); }
-.menu span, .about span { filter: url(#prensa-leitura); }
+.menu a:hover { color: var(--fg); }
+.menu a[aria-current="page"] { color: var(--fg); }
+.menu span { filter: url(#prensa-leitura); }
 
 /* Em ecrãs estreitos o menu aperta; só quando já não cabe na linha da imagem desce para uma linha própria, ao centro */
 @media (max-width: 600px) { .menu { gap: 1.25rem; } }
@@ -257,3 +256,7 @@ body::after {
   filter: none;
   box-shadow: 0 0 0 1px var(--line);
 }
+
+/* O About na página inicial: o título mais pequeno e o texto maior, para ficarem mais perto (o Telmo, 2026-11-20) */
+.intro h1 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); margin-bottom: 1.25rem; }
+.intro p { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.75rem); line-height: 1.45; }
