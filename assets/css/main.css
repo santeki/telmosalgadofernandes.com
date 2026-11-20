@@ -259,4 +259,4 @@ body::after {
 
 /* O About na página inicial: o título mais pequeno e o texto maior, para ficarem mais perto (o Telmo, 2026-11-20) */
 .intro h1 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); margin-bottom: 1.25rem; }
-.intro p { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.75rem); line-height: 1.45; }
+.intro p { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); line-height: 1.5; }
