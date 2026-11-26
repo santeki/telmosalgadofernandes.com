@@ -8,8 +8,10 @@
 {{- $desc := or .Description site.Params.description }}
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
-{{- /* Sem ícone no separador (o Telmo, 2026-11-20): um ícone vazio, para o browser não pedir o /favicon.ico */}}
-<link rel="icon" href="data:,">
+{{- /* O ícone do site é o Alexandre (o Telmo, 2026-11-26), sobre o preto do site: aparece no separador e nos resultados do Google */}}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
+<link rel="icon" href="{{ "favicon-192.png" | relURL }}" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 {{- with site.Home.OutputFormats.Get "rss" }}
 <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">
 {{- end }}
